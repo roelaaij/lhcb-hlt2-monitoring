@@ -1,6 +1,7 @@
 #ifndef HIST_H
 #define HIST_H
 
+#include <ostream>
 #include <vector>
 
 #include <boost/serialization/vector.hpp>
@@ -36,6 +37,22 @@ class Hist {
     return bins_[timeBin];
   }
 
+  /** Compare for equality.
+   */
+  auto operator==(const Hist& rhs) const noexcept -> bool {
+    if (this == &rhs) {
+      return true;
+    }
+    return (tck_ == rhs.tck_) && (run_number_ == rhs.run_number_) &&
+           (bins_ == rhs.bins_);
+  }
+  /** Compare for inequality.
+   * Uses operator== internally.
+   */
+  auto operator!=(const Hist& rhs) const noexcept -> bool {
+    return !(*this == rhs);
+  }
+
   // Modifiers
   /** Increment bin.
    * TODO: Does this need to be atomic?
@@ -64,5 +81,12 @@ class Hist {
   run_number_t run_number_;
   bins_t bins_;
 };
+
+/** Pretty output that contains _some_ information.
+ */
+auto operator<<(std::ostream& os, const Hist& hist) -> std::ostream & {
+  os << "Hist for run " << hist.run_number() << " (TCK: " << hist.tck() << ')';
+  return os;
+}
 
 #endif  // HIST_H

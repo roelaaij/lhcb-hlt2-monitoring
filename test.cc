@@ -1,6 +1,7 @@
 #include "hist.h"
 
 #include <algorithm>
+#include <cassert>
 #include <fstream>
 #include <iostream>
 #include <random>
@@ -25,17 +26,18 @@ int main() {
                 [&rng, &dist]() { return dist(rng); });
 
   { // Write out
-    std::ofstream ofs{"serialized.bin"};
+    std::ofstream ofs{"serialized.txt"};
     boost::archive::text_oarchive oa{ofs};
     oa << hist;
   }
 
   Hist inHist;
   { // Read back in
-    std::ifstream ifs{"serialized.bin"};
+    std::ifstream ifs{"serialized.txt"};
     boost::archive::text_iarchive ia{ifs};
     ia >> inHist;
   }
-  std::copy(std::begin(inHist.bins()), std::end(inHist.bins()),
-            std::ostream_iterator<Hist::bin_t>(std::cout, " "));
+  std::cout << inHist << '\n';
+
+  assert(hist == inHist);
 }

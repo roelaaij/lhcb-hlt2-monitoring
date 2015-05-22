@@ -9,4 +9,4 @@ test: test.cc
 
 clean:
 	rm -f test
-	rm -f serialized.bin
+	rm -f serialized.txt
