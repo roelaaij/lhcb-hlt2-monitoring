@@ -8,12 +8,12 @@
 class Hist {
  public:
   using index_t = std::size_t;
-  static const index_t PERIOD = 60u * 70u;
   using tck_t = unsigned;
   using run_number_t = unsigned long long;
   using bin_t = unsigned long;
   using bins_t = std::vector<bin_t>;  // use vector because we'd need to null
                                       // the array anyway
+  static const index_t PERIOD = 60u * 70u;
 
   Hist(tck_t tck, run_number_t run_number) noexcept : tck_{tck},
                                                       run_number_{run_number},
