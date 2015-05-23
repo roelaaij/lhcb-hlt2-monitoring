@@ -1,0 +1,10 @@
+syntax = "proto2";
+package monitoring;
+
+message Chunk {
+  required int32 runNumber = 1;
+  required int32 tck = 2;
+  required int32 id = 3;
+  required int32 start = 4;
+  repeated int32 data = 5 [packed=true];
+}
