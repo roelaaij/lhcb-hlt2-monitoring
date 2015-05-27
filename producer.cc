@@ -19,8 +19,10 @@ auto randomChunk(RNG& rng) -> Monitoring::Chunk {
   static std::uniform_int_distribution<Monitoring::Seconds> dist_start(0, 3600);
   static std::uniform_int_distribution<Monitoring::BinContent> dist_bin(0, 50);
 
-  auto c = Monitoring::Chunk{dist_run(rng), dist_tck(rng), dist_id(rng),
-                             dist_start(rng), 10};
+  //auto c = Monitoring::Chunk{dist_run(rng), dist_tck(rng), dist_id(rng),
+  //                           dist_start(rng), 10};
+  // For the moment used fixed TCK and runNumber
+  auto c = Monitoring::Chunk{1, 1, dist_id(rng), dist_start(rng), 10};
   std::generate(std::begin(c.data), std::end(c.data),
                 [&rng]() { return dist_bin(rng); });
   return c;

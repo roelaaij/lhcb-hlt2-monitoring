@@ -14,7 +14,7 @@ int main() {
   sub.bind("tcp://*:31338");
   sub.setsockopt(ZMQ_SUBSCRIBE, "", 0);
 
-  std::unordered_map<Monitoring::HistId, Monitoring::Chunk> histograms;
+  std::unordered_map<Monitoring::HistId, Monitoring::Histogram> histograms;
 
   auto start = std::chrono::high_resolution_clock::now();
 
@@ -34,10 +34,10 @@ int main() {
 
     // Add to internal store
     if (!histograms.count(c.histId)) {
-      histograms[c.histId] = Monitoring::Chunk{c.runNumber, c.tck, c.histId, 0,
-                                               c.start + c.data.size()};
+      histograms[c.histId] =
+          Monitoring::Histogram{c.runNumber, c.tck, c.histId};
     }
-    histograms[c.histId] += c;
+    histograms[c.histId].addChunk(c);
 
     // If not displayed for interval seconds, show all current histograms
     auto now = std::chrono::high_resolution_clock::now();

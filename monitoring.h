@@ -14,6 +14,8 @@ using RunNumber = unsigned long;
 using BinContent = unsigned long long;
 using Seconds = std::size_t;
 
+static const Seconds RUN_PERIOD = 70 * 60;
+
 /** A serialize-able chunk of data that spans DELTA_T seconds.
  */
 struct Chunk {
@@ -41,6 +43,27 @@ struct Chunk {
   std::vector<BinContent> data;
 };
 
+
+/**
+ */
+struct Histogram {
+  Histogram() = default;
+  Histogram(RunNumber runNumber, TCK tck, HistId histId)
+      : runNumber{runNumber}, tck{tck}, histId{histId} {}
+
+  auto addChunk(const Chunk& c) noexcept -> void {
+    assert(runNumber == c.runNumber && tck == c.tck && histId == c.histId);
+    assert(c.start + c.data.size() < RUN_PERIOD);
+    std::copy(std::begin(c.data), std::end(c.data), std::begin(data) + c.start);
+  }
+
+  RunNumber runNumber;
+  TCK tck;
+  HistId histId;
+  std::array<BinContent, RUN_PERIOD> data;
+};
+
+
 /** Write a chunk of data to a std::ostream.
  */
 auto operator<<(std::ostream& os, const Chunk& chunk) -> std::ostream & {
@@ -50,6 +73,14 @@ auto operator<<(std::ostream& os, const Chunk& chunk) -> std::ostream & {
   std::copy(std::begin(chunk.data), std::end(chunk.data),
             std::ostream_iterator<BinContent>(os, " "));
   os << ']';
+  return os;
+}
+
+/** Write histogram to a std::ostream.
+ */
+auto operator<<(std::ostream& os, const Histogram& h) -> std::ostream& {
+  os << "Monitoring::Histogram [Run: " << h.runNumber << ", TCK: " << h.tck
+     << ", HistId: " << h.histId << "]";
   return os;
 }
 }
