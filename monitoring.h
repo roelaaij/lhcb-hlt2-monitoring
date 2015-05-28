@@ -49,12 +49,14 @@ struct Chunk {
 struct Histogram {
   Histogram() = default;
   Histogram(RunNumber runNumber, TCK tck, HistId histId)
-      : runNumber{runNumber}, tck{tck}, histId{histId} {}
+      : runNumber{runNumber}, tck{tck}, histId{histId}, data{} {}
 
   auto addChunk(const Chunk& c) noexcept -> void {
     assert(runNumber == c.runNumber && tck == c.tck && histId == c.histId);
     assert(c.start + c.data.size() < RUN_PERIOD);
-    std::copy(std::begin(c.data), std::end(c.data), std::begin(data) + c.start);
+    std::transform(std::begin(c.data), std::end(c.data),
+                   std::begin(data) + c.start, std::begin(data) + c.start,
+                   std::plus<>());
   }
 
   RunNumber runNumber;
