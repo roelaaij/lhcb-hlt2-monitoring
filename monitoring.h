@@ -83,6 +83,9 @@ auto operator<<(std::ostream& os, const Chunk& chunk) -> std::ostream & {
 auto operator<<(std::ostream& os, const Histogram& h) -> std::ostream& {
   os << "Monitoring::Histogram [Run: " << h.runNumber << ", TCK: " << h.tck
      << ", HistId: " << h.histId << "]";
+  // For testing print something that depends on the data.
+  os << "\n                      Integral = "
+     << std::accumulate(std::begin(h.data), std::end(h.data), 0);
   return os;
 }
 }
