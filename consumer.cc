@@ -46,6 +46,7 @@ int main() {
       for (const auto& h : histograms) {
         std::cout << h.second << std::endl;
       }
+      start = now;
     }
   }
 }
