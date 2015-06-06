@@ -1,0 +1,61 @@
+\documentclass[aspectratio=1610,compress,titleprogressbar]{beamer}
+\usetheme{m}
+
+\usepackage[british]{babel}
+\usepackage{booktabs}
+\usepackage{caption}
+  \captionsetup[figure]{labelformat=empty}
+  \captionsetup[table]{labelformat=empty}
+\usepackage{fontspec}
+\usepackage{fontawesome}
+\usepackage[italic]{hepnicenames}
+\usepackage{microtype}
+\usepackage{minted}
+  \usemintedstyle{trac}
+\usepackage{multirow}
+\usepackage{siunitx}
+  \sisetup{separate-uncertainty=true}
+\usepackage{unicode-math}
+
+\title{Hlt2 Rate Monitoring in Run II}
+\subtitle{ZeroMQ All The Things!}
+\author[K.~Dungs]{Roel~Aaij\inst{1} \and \textcolor{orange}{Kevin~Dungs\inst{2}}}
+\institute{\inst{1} CERN \and \inst{2} TU Dortmund}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Motivation}
+  \begin{columns}[t]
+    \begin{column}{.5\textwidth}
+      \begin{block}{Run II HLT}
+        \begin{itemize}
+          \item [•] Split Hlt1 and Hlt2
+          \item [•] Events not processed in sequence any more
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{.5\textwidth}
+      \begin{block}{Why not DIM?}
+        \begin{itemize}
+          \item [•] No notion of ``time''
+        \end{itemize}
+      \end{block}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{ØMQ}
+\end{frame}
+
+\begin{frame}{Prototype}
+\end{frame}
+
+\begin{frame}{Testing on the Farm}
+\end{frame}
+
+\begin{frame}{What's next}
+\end{frame}
+
+\end{document}
