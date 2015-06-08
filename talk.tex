@@ -35,13 +35,13 @@
     \begin{itemize}
       \item We had to write the infrastructure anyway
       \item Easier for us with ZeroMQ
-      \item Also we \emph{wanted} to try it out
+      \item Also we \emph{wanted} to try it out :)
       \item DIM still used for steering
     \end{itemize}
   \end{block}
 \end{frame}
 
-\begin{frame}{ZeroMQ (ØMQ, ZMQ, \dots)} 
+\begin{frame}{ZeroMQ (ØMQ, ZMQ, \dots)}
   \begin{columns}
     \begin{column}{.6\textwidth}
       \begin{itemize}
@@ -74,11 +74,18 @@
 \begin{frame}{Prototype}
   \begin{block}{Back of the Envelope Calculation}
     \begin{itemize}
-      \item \texttt{TFileBuffer} adds too much overhead (factor $8 -- 10$)
       \item Use custom data structure for chunks of data \begin{itemize}
-        \item TCK + identifier + relative time + array
+          \item TCK + identifier + relative time + array (\SI{10}{\second})
+        \item Serialise with \texttt{boost::serialization}
       \end{itemize}
-      \item Roughly $\SI{100}{Histograms} \times \SI{70}{\kilo Tasks} \times \SI{0.1}{\kilo B\per Event} \times \SI{0.1}{\hertz} = \SI{70}{\mega B\per\second}$
+    \end{itemize}
+      
+    \begin{equation*}
+      \SI{100}{Histograms} \times \SI{70}{\kilo Tasks} \times \SI{0.1}{\kilo B\per Event} \times \frac{\num{1}}{\SI{10}{\second}} = \SI{70}{\mega B\per\second}
+    \end{equation*}
+
+    \begin{itemize}
+      \item \texttt{TFileBuffer} adds too much overhead (factor \numrange{8}{10})
     \end{itemize}
   \end{block}
 \end{frame}
@@ -100,7 +107,7 @@
 
 \begin{frame}{What's next}
   \begin{itemize}
-    \item Run on the farm
+    \item Run on the full farm
     \item \textbf{Numbers!} (timing, throughput, ...)
     \item Interoperability with current (+new) presenter \begin{itemize}
       \item First: Histogram with 10 bins showing full rate of last processed run $-n$
