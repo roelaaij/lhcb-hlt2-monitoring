@@ -16,7 +16,7 @@
 \usepackage{unicode-math}
 
 \title{Hlt2 Rate Monitoring in Run II}
-\subtitle{ZeroMQ All The Things!}
+%\subtitle{ZeroMQ All The Things!}
 \author[K.~Dungs]{Roel~Aaij\inst{1} \and \textcolor{orange}{Kevin~Dungs\inst{2}}}
 \institute{\inst{1} CERN \and \inst{2} TU Dortmund}
 
@@ -25,27 +25,21 @@
 \maketitle
 
 \begin{frame}{Motivation}
-  \begin{columns}[t]
-    \begin{column}{.5\textwidth}
-      \begin{block}{Run II HLT}
-        \begin{itemize}
-          \item Split Hlt1 and Hlt2
-          \item Events not processed in sequence any more
-        \end{itemize}
-      \end{block}
-    \end{column}
-    \begin{column}{.5\textwidth}
-      \begin{block}{Why not DIM?}
-        \begin{itemize}
-          \item Would have had to hack pure DIM
-          \item Send the character buffer manually
-        \end{itemize}
-      \end{block}
-    \end{column}
-  \end{columns}
+  \begin{block}{Run II HLT}
+    \begin{itemize}
+      \item Split Hlt1 and Hlt2
+      \item Events not processed in sequence any more
+    \end{itemize}
+  \end{block}
+  \begin{block}{Why not DIM?}
+    \begin{itemize}
+      \item Would have had to hack pure DIM
+      \item Send the character buffer manually
+    \end{itemize}
+  \end{block}
 \end{frame}
 
-\begin{frame}{ZeroMQ (ØMQ, ZMQ)}
+\begin{frame}{ZeroMQ (also ØMQ, ZMQ, \dots)} 
   \begin{columns}
     \begin{column}{.6\textwidth}
       \begin{itemize}
@@ -105,7 +99,7 @@
   \begin{itemize}
     \item Run on the farm
     \item \textbf{Numbers!} (timing, throughput, ...)
-    \item Interoperability with old/new presenter
+    \item Interoperability with current (+new) presenter
   \end{itemize}
 \end{frame}
 
