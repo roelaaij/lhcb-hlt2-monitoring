@@ -33,13 +33,15 @@
   \end{block}
   \begin{block}{Why not DIM?}
     \begin{itemize}
-      \item Would have had to hack pure DIM
-      \item Send the character buffer manually
+      \item We had to write the infrastructure anyway
+      \item Easier for us with ZeroMQ
+      \item Also we \emph{wanted} to try it out
+      \item DIM still used for steering
     \end{itemize}
   \end{block}
 \end{frame}
 
-\begin{frame}{ZeroMQ (also ØMQ, ZMQ, \dots)} 
+\begin{frame}{ZeroMQ (ØMQ, ZMQ, \dots)} 
   \begin{columns}
     \begin{column}{.6\textwidth}
       \begin{itemize}
@@ -72,11 +74,11 @@
 \begin{frame}{Prototype}
   \begin{block}{Back of the Envelope Calculation}
     \begin{itemize}
-      \item \texttt{TFileBuffer} adds too much overhead
+      \item \texttt{TFileBuffer} adds too much overhead (factor $8 -- 10$)
       \item Use custom data structure for chunks of data \begin{itemize}
         \item TCK + identifier + relative time + array
       \end{itemize}
-      \item Roughly $\SI{100}{Histograms} \times \SI{0.1}{\kilo B\per Event} \times \SI{70}{\kilo Tasks} \times \SI{0.1}{\hertz} = \SI{70}{\mega B\per\second}$
+      \item Roughly $\SI{100}{Histograms} \times \SI{70}{\kilo Tasks} \times \SI{0.1}{\kilo B\per Event} \times \SI{0.1}{\hertz} = \SI{70}{\mega B\per\second}$
     \end{itemize}
   \end{block}
 \end{frame}
@@ -84,13 +86,14 @@
 \begin{frame}{Testing on the Farm}
   \begin{itemize}
     \item ZeroMQ package for LHCb software
-    \item Producer and Relay implemented in terms of Gaudi
+    \item Producer and Relay implemented as \texttt{Gaudi::Service}s
     \item Standalone consumer (for testing)
     \item [] {}
     \item One global consumer
+    \item One relay per subfarm
     \item Per node: \begin{itemize}
       \item One relay
-      \item $N$ producers
+      \item $N$ producers ($N \approx 28 \dots 36$)
     \end{itemize}
   \end{itemize}
 \end{frame}
@@ -99,7 +102,10 @@
   \begin{itemize}
     \item Run on the farm
     \item \textbf{Numbers!} (timing, throughput, ...)
-    \item Interoperability with current (+new) presenter
+    \item Interoperability with current (+new) presenter \begin{itemize}
+      \item First: Histogram with 10 bins showing full rate of last processed run $-n$
+      \item New presenter: Dynamic views!
+    \end{itemize}
   \end{itemize}
 \end{frame}
 

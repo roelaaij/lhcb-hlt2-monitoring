@@ -145,7 +145,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -379,5 +379,18 @@
            y="275.36221"
            style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:17.5px;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans Semi-Bold'" /></flowRegion><flowPara
          id="flowPara4327-3-5"
-         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:17.5px;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans Semi-Bold'">~1</flowPara></flowRoot>  </g>
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:17.5px;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans Semi-Bold'">~1</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4321-7-4"
+       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:17.5px;line-height:125%;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans Semi-Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="translate(54.08926,-50.245373)"><flowRegion
+         id="flowRegion4323-4-3"><rect
+           id="rect4325-3-4"
+           width="195"
+           height="108"
+           x="266"
+           y="275.36221"
+           style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:17.5px;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans Semi-Bold'" /></flowRegion><flowPara
+         id="flowPara4327-3-9"
+         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:17.5px;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans Semi-Bold'">+ 1/subfarm</flowPara></flowRoot>  </g>
 </svg>
