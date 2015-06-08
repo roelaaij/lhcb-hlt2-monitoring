@@ -8,14 +8,11 @@
   \captionsetup[table]{labelformat=empty}
 \usepackage{fontspec}
 \usepackage{fontawesome}
-\usepackage[italic]{hepnicenames}
-\usepackage{microtype}
-\usepackage{minted}
+\usepackage[italic]{hepnicenames} \usepackage{microtype} \usepackage{minted}
   \usemintedstyle{trac}
 \usepackage{multirow}
 \usepackage{siunitx}
   \sisetup{separate-uncertainty=true}
-\usepackage{svg}
 \usepackage{unicode-math}
 
 \title{Hlt2 Rate Monitoring in Run II}
@@ -40,7 +37,8 @@
     \begin{column}{.5\textwidth}
       \begin{block}{Why not DIM?}
         \begin{itemize}
-          \item No notion of ``time''
+          \item Would have had to hack pure DIM
+          \item Send the character buffer manually
         \end{itemize}
       \end{block}
     \end{column}
@@ -78,30 +76,35 @@
 \end{frame}
 
 \begin{frame}{Prototype}
-  \begin{columns}
-    \begin{column}{.5\textwidth}
-    \end{column}
-    \begin{column}{.5\textwidth}
-      \begin{itemize}
-        \item ZeroMQ package for LHCb software
-        \item Producer and Relay integrated into monitoring software
-        \item Consumer standalone
-        \item [] {}
-        \item [⇒] Put on the farm and test throughput
+  \begin{block}{Back of the Envelope Calculation}
+    \begin{itemize}
+      \item \texttt{TFileBuffer} adds too much overhead
+      \item Use custom data structure for chunks of data \begin{itemize}
+        \item TCK + identifier + relative time + array
       \end{itemize}
-    \end{column}
-  \end{columns}
+      \item Roughly $\SI{100}{Histograms} \times \SI{0.1}{\kilo B\per Event} \times \SI{70}{\kilo Tasks} \times \SI{0.1}{\hertz} = \SI{70}{\mega B\per\second}$
+    \end{itemize}
+  \end{block}
 \end{frame}
 
 \begin{frame}{Testing on the Farm}
-  \Huge TODO: Needs Numbers!
+  \begin{itemize}
+    \item ZeroMQ package for LHCb software
+    \item Producer and Relay implemented in terms of Gaudi
+    \item Standalone consumer (for testing)
+    \item [] {}
+    \item One global consumer
+    \item Per node: \begin{itemize}
+      \item One relay
+      \item $N$ producers
+    \end{itemize}
+  \end{itemize}
 \end{frame}
 
-\begin{frame}{Conclusion and Outlook}
+\begin{frame}{What's next}
   \begin{itemize}
-    \item \textbf{Proof of concept works and scales!}
-    \item [] {}
-    \item Now need integrate actual monitoring needs
+    \item Run on the farm
+    \item \textbf{Numbers!} (timing, throughput, ...)
     \item Interoperability with old/new presenter
   \end{itemize}
 \end{frame}
